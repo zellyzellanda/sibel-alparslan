@@ -35,12 +35,16 @@
       <button class="rsvp-toggle" id="rsvp-toggle" type="button" aria-expanded="false" aria-controls="after-party-rsvp"><span aria-hidden="true">✦</span>After Party?<span aria-hidden="true">♡</span></button>
       <aside class="rsvp-card" id="after-party-rsvp" aria-hidden="true">
         <span class="rsvp-doodle" aria-hidden="true">✦ 〰 ♡</span><button class="rsvp-close" id="rsvp-close" type="button" aria-label="After party formunu kapat">×</button>
-        <div id="rsvp-content"><p class="rsvp-kicker">Geceyi birlikte tamamlayalım</p><h2>Konaklama</h2><p class="rsvp-copy">Konaklama planını bize iletebilir misin?</p>
+        <div id="rsvp-content"><p class="rsvp-kicker">Düğün bitince dağılmıyoruz</p><h2>Geceye devam mı?</h2><p class="rsvp-copy">Parti ve konaklama planını bize iletebilir misin?</p>
           <form class="rsvp-form" id="rsvp-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfmQKn7jQHHUlOcbafAkk8uKedBUeV4Sf12VPstaT0iuSt4Dg/formResponse" method="POST" target="after-party-submit">
-            <label for="guest-name">İsim / Soyisim</label><input id="guest-name" name="entry.714259196" type="text" autocomplete="name" placeholder="Adını buraya yaz" required>
+            <label for="guest-name">İsim / Soyisim</label><input id="guest-name" type="text" autocomplete="name" placeholder="Adını buraya yaz" required><input id="google-name" name="entry.714259196" type="hidden">
+            <fieldset><legend>After party’ye katılacak mısın?</legend>
+              <label class="rsvp-option"><input type="radio" name="entry.1791675196" value="Evet! 🥳" required><span>Partilicem!</span></label>
+              <label class="rsvp-option"><input type="radio" name="entry.1791675196" value="Hayır ben sıkıcı birisiyim.. 👵" required><span>Hayır ben sıkıcı birisiyim.</span></label>
+            </fieldset>
             <fieldset><legend>Akşam konaklayacak mısın? <span class="rsvp-price">(Kişi başı 2000 TL + kahvaltı)</span></legend>
-              <label class="rsvp-option"><input type="radio" name="entry.1791675196" value="Evet! 🥳" required><span>Evet</span></label>
-              <label class="rsvp-option"><input type="radio" name="entry.1791675196" value="Hayır ben sıkıcı birisiyim.. 👵" required><span>Hayır</span></label>
+              <label class="rsvp-option"><input type="radio" name="stay-answer" value="Evet" required><span>Evet</span></label>
+              <label class="rsvp-option"><input type="radio" name="stay-answer" value="Hayır" required><span>Hayır</span></label>
             </fieldset><button class="rsvp-submit" type="submit">Yanıtımı gönder <span aria-hidden="true">→</span></button>
           </form>
         </div>
@@ -56,7 +60,7 @@
       card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||focused)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;card.style.setProperty('--ry',`${(x-.5)*10}deg`);card.style.setProperty('--rx',`${(.5-y)*8}deg`);card.style.setProperty('--lx',`${x*100}%`);card.style.setProperty('--ly',`${y*100}%`)});
       card.addEventListener('pointerleave',()=>{card.style.setProperty('--ry','0deg');card.style.setProperty('--rx','0deg');card.style.setProperty('--lx','35%');card.style.setProperty('--ly','18%')});
       const rsvpToggle=document.getElementById('rsvp-toggle'),rsvpCard=document.getElementById('after-party-rsvp'),rsvpClose=document.getElementById('rsvp-close'),rsvpForm=document.getElementById('rsvp-form'),rsvpContent=document.getElementById('rsvp-content'),rsvpSuccess=document.getElementById('rsvp-success');
-      function setRsvp(open){rsvpCard.classList.toggle('is-open',open);rsvpCard.setAttribute('aria-hidden',String(!open));rsvpToggle.setAttribute('aria-expanded',String(open))}rsvpToggle.addEventListener('click',()=>setRsvp(true));rsvpClose.addEventListener('click',()=>setRsvp(false));rsvpForm.addEventListener('submit',()=>setTimeout(()=>{rsvpContent.hidden=true;rsvpSuccess.hidden=false},500));
+      function setRsvp(open){rsvpCard.classList.toggle('is-open',open);rsvpCard.setAttribute('aria-hidden',String(!open));rsvpToggle.setAttribute('aria-expanded',String(open))}rsvpToggle.addEventListener('click',()=>setRsvp(true));rsvpClose.addEventListener('click',()=>setRsvp(false));rsvpForm.addEventListener('submit',()=>{const stay=new FormData(rsvpForm).get('stay-answer');document.getElementById('google-name').value=`${document.getElementById('guest-name').value} — Konaklama: ${stay}`;setTimeout(()=>{rsvpContent.hidden=true;rsvpSuccess.hidden=false},500)});
     </script>
   </body>
 </html>
