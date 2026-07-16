@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Sibel ve Alparslan//Dugun Davetiyesi//TR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20260822-sibel-alparslan-dugun@github.io
+DTSTAMP:20260716T140000Z
+DTSTART:20260822T160000Z
+DTEND:20260822T205900Z
+SUMMARY:Sibel & Alparslan Düğünü
+LOCATION:Değirmenbaşı Butik Otel\, Gölcük
+DESCRIPTION:Nikah: 19:00\nDüğün: 19:30
+URL:https://zellyzellanda.github.io/sibel-alparslan/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
